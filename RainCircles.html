@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sounds and circles</title>
+    <script type="text/javascript" src="paper-full.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.2/howler.js"></script>
+    <link rel="stylesheet" type="text/css" href="circles.css">
+
+    <script type="text/paperscript" canvas="myCanvas">
+
+// The amount of circles (minimum 57 due to keyData):
+var count = 100;
+
+// Array that will hold all circles
+var allPoints = [];
+
+// Sound bound to key events
+// Color isnt used
+var keyData = {
+        // Copied from Colt Steeles course
+            q: {
+                index: 1,
+				sound: new Howl({
+		  		src: ['circlesounds/01-bubbles.mp3']
+				})
+			},
+			w: {
+                index: 3,
+				sound: new Howl({
+		  		src: ['circlesounds/02-clay.mp3']
+				})
+			},
+			e: {
+                index: 5,
+				sound: new Howl({
+		  		src: ['circlesounds/03-confetti.mp3']
+				}),
+				color: '#3498db'
+			},
+			r: {
+                index: 7,
+				sound: new Howl({
+		  		src: ['circlesounds/04-corona.mp3']
+				}),
+				color: '#9b59b6'
+			},
+			t: {
+                index: 9,
+				sound: new Howl({
+		  		src: ['circlesounds/05-dotted-spiral.mp3']
+				}),
+				color: '#34495e'
+			},
+			y: {
+                index: 11,
+				sound: new Howl({
+		  		src: ['circlesounds/06-flash-1.mp3']   
+				}),
+				color: '#16a085'
+			},
+			u: {
+                index: 13,
+				sound: new Howl({
+		  		src: ['circlesounds/07-glimmer.mp3']
+				}),
+				color: '#27ae60'
+			},
+			i: {
+                index: 15,
+				sound: new Howl({
+		  		src: ['circlesounds/08-dotted-spiral02.mp3']       
+				}),
+				color: '#2980b9'
+			},
+			o: {
+                index: 17,
+				sound: new Howl({
+				src: ['circlesounds/09-prism-3.mp3']  
+				}),
+				color: '#8e44ad'
+			},
+			p: {
+                index: 19,
+				sound: new Howl({
+		  		src: ['circlesounds/10-ls__beep-in-stero.wav']
+				}),
+				color: '#2c3e50'
+			},
+			a: {
+                index: 21,
+				sound: new Howl({
+		  		src: ['circlesounds/11-nenadsimic__menu-selection-click.wav']
+				}),
+				color: '#f1c40f'
+			},
+			s: {
+                index: 23,
+				sound: new Howl({
+		  		src: ['circlesounds/12-pinwheel.mp3']
+				}),
+				color: '#e67e22'
+			},
+			d: {
+                index: 25,
+				sound: new Howl({
+		  		src: ['circlesounds/13-squiggle.mp3'] 
+				}),
+				color: '#e74c3c'
+			},
+			f: {
+                index: 27,
+				sound: new Howl({
+		  		src: ['circlesounds/14-ufo.mp3']   
+				}),
+				color: '#95a5a6'
+			},
+			g: {
+                index: 29,
+				sound: new Howl({
+		  		src: ['circlesounds/15-bubbles02.mp3']    
+				}),
+				color: '#f39c12'
+			},
+			h: {
+                index: 31,
+				sound: new Howl({
+		  		src: ['circlesounds/16-seidhepriest__cups-soft-3.wav']
+				}),
+				color: '#d35400'
+			},
+			j: {
+                index: 33,
+				sound: new Howl({
+		  		src: ['circlesounds/17-splits.mp3']
+				}),
+				color: '#1abc9c'
+			},
+			k: {
+                index: 35,
+				sound: new Howl({
+		  		src: ['circlesounds/18-strike.mp3']
+				}),
+				color: '#2ecc71'
+			},
+			l: {
+                index: 37,
+				sound: new Howl({
+		  		src: ['circlesounds/19-veil.mp3']
+				}),
+				color: '#3498db'
+			},
+			z: {
+                index: 39,
+				sound: new Howl({
+		  		src: ['circlesounds/20-soneproject__ecofuture2.wav']   
+				}),
+				color: '#9b59b6'
+			},
+			x: {
+                index: 41,
+				sound: new Howl({
+		  		src: ['circlesounds/21-wertstahl__017-fogshot.wav']
+				}),
+				color: '#34495e'
+			},
+			c: {
+                index: 43,
+				sound: new Howl({
+		  		src: ['circlesounds/22-wertstahl__mailinbox2.wav']
+				}),
+				color: '#16a085'
+			},
+			v: {
+                index: 45,
+				sound: new Howl({
+		  		src: ['circlesounds/23-wipe.mp3']
+				}),
+				color: '#27ae60'
+			},
+			b: {
+                index: 47,
+				sound: new Howl({
+		  		src: ['circlesounds/24-mad-monkey__power08.wav']      
+				}),
+				color: '#2980b9'
+			},
+			n: {
+                index: 49,
+				sound: new Howl({
+					src: ['circlesounds/25-pera__pong.wav']   
+				}),
+				color: '#8e44ad'
+			},
+			m: {
+                index: 51,
+				sound: new Howl({
+		  		src: ['circlesounds/26-soneproject__ecofuture1.wav']
+				}),
+				color: '#2c3e50'
+			},
+			å: {
+                index: 52,
+				sound: new Howl({
+		  		src: ['circlesounds/27-oneproject__jingle3.wav']
+				}),
+				color: '#2c3e50'
+			},
+			ä: {
+                index: 53,
+				sound: new Howl({
+		  		src: ['circlesounds/28-soneproject__jingle2.wav']
+				}),
+				color: '#2c3e50'
+			},
+			ö: {
+                index: 54,
+				sound: new Howl({
+		  		src: ['circlesounds/29-soneproject__jingle1.wav']
+				}),
+				color: '#2c3e50'
+			},
+			space: {
+                index: 55,
+				sound: new Howl({
+		  		src: ['circlesounds/30-soneproject__digital-life-1.wav']
+				}),
+				color: '#2c3e50'
+			},
+            1: {
+                index: 56,
+				sound: new Howl({
+		  		src: ['circlesounds/31-pera__sogne.wav']
+				}),
+				color: '#2c3e50'
+			}
+    }
+
+// Styling of symbol, which we will use to place instances of later:
+var path = new Path.Circle({
+	center: [0, 0],
+	radius: 10,
+	fillColor: 'white',
+	strokeColor: 'rgba(10,10,10,0.5)'
+});
+
+var symbol = new Symbol(path);
+
+// Place the instances of the symbol:
+for (var i = 0; i < count; i++) {
+	// The center position is a random point in the view:
+	var center = Point.random() * view.size;
+	var placedSymbol = symbol.place(center);
+	placedSymbol.scale(i / count);
+    // add symbol to array 
+    allPoints.push(placedSymbol);
+}
+
+
+// The onFrame function is called up to 60 times a second:
+function onFrame(event) {
+	// Run through the active layer's children list and change
+	// the position of the placed symbols:
+	for (var i = 0; i < count; i++) {
+		var item = project.activeLayer.children[i];
+		
+		// Move the item 1/20th of its width to the right. This way
+		// larger circles move faster than smaller circles:
+		item.position.y += item.bounds.height / 20;
+
+		// If the item has left the view on the right, move it back
+		// to the left:
+		if (item.position.y > view.size.height) {
+			item.position.y = 0;
+		}
+	}
+}
+
+    // Enlarges a circle and sets the opacity
+    function enlargeCircle(point) {
+            point.bounds.width = 60;
+            point.bounds.height = 60;
+            point.opacity = 0.4;
+    }
+
+    // Shrinks the circle to normal size and sets opacity
+    function returnToNormalSize(point) {
+            point.bounds.width = 20;
+            point.bounds.height = 20;
+            point.opacity = 1;
+    }
+
+    // When key is pressed, play associated sound and make one of the circles grow
+    function onKeyDown(event) {
+        if(keyData[event.key]) {
+            keyData[event.key].sound.play();
+            enlargeCircle(allPoints[keyData[event.key].index]);
+        }
+    }
+
+    // on key up, circles return to their normal size
+    function onKeyUp(event) {
+        if(keyData[event.key]) {
+        returnToNormalSize(allPoints[keyData[event.key].index]);
+        }
+    }
+
+
+    
+    
+    </script>
+</head>
+<body>
+    
+    <canvas id="myCanvas" resize></canvas>
+</body>
+</html>

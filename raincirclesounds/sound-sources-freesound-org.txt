@@ -1,0 +1,31 @@
+Freesound sources, username and file name.
+
+wertstahl - 	011_electronic-airgun
+		017+-fogshot
+		mailinbox2
+
+seidhepriest - 	cups-soft-3
+
+ls - 		beep-in-stero
+
+NenadSimic - 	menu-selection-click
+
+soneproject - 	ecofuture1
+		ecofuture2
+		jingle3
+		jingle2
+		jingle1
+		digital-life-1
+
+mad-monkey - 	power08
+
+pera -		pong
+
+
+
+		
+
+		
+		
+		
+
